@@ -4,12 +4,9 @@ from tkinter.filedialog import askopenfilename, asksaveasfilename
 heightmap_out = []
 typemap_out = []
 shadermap_out = []
-print("Select heightmap")
-heightmapfile = askopenfilename()
-print("Select typemap")
-typemapfile = askopenfilename()
-print("Select shadermap")
-shadermapfile = askopenfilename()
+heightmapfile = askopenfilename(title="Select heightmap...", filetypes=[("PNG Files", "*.png")])
+typemapfile = askopenfilename(title="Select typemap...", filetypes=[("PNG Files", "*.png")])
+shadermapfile = askopenfilename(title="Select shadermap...", filetypes=[("PNG Files", "*.png")])
 hmap = Image.open(heightmapfile)
 tmap = Image.open(typemapfile)
 smap = Image.open(shadermapfile)
@@ -32,7 +29,7 @@ for x in range(smap.size[0]):
     for y in range(smap.size[1]):
         shading = str(hmap.getpixel((x, y)))
         shadermap_out.append(shading)
-smapfile = asksaveasfilename()
+smapfile = asksaveasfilename(title="Save as...", filetypes=[("SMAP Files", "*.smap")])
 with open(smapfile, 'w') as f:
     f.truncate(0)
     f.write(str(hmap.size[0]) + '\n')
